@@ -1,4 +1,5 @@
 # Study
 
 2nd Commit - jupiter notebook
-list comprehension
+list comprehensions
+lambda function
