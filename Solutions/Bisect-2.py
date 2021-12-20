@@ -6,10 +6,10 @@ def bisect(arr, x):
 
 
 def binary_search_start(array, target):
-    start, end = 0, len(array)-1
+    start, end = 0, len(array) - 1
     startIdx = -1
     while start <= end:
-        mid = (start+end) // 2
+        mid = start + (end - start) // 2
         if array[mid] == target:
             startIdx = mid
             end = mid - 1
@@ -21,10 +21,10 @@ def binary_search_start(array, target):
 
 
 def binary_search_end(array, target):
-    start, end = 0, len(array)-1
+    start, end = 0, len(array) - 1
     EndIdx = -1
     while start <= end:
-        mid = (start+end) // 2
+        mid = start + (end - start) // 2
         if array[mid] == target:
             EndIdx = mid
             start = mid + 1
