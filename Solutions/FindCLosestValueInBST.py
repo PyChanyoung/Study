@@ -2,7 +2,7 @@ def findClosestValueInBst(tree, target):
     current = tree
     closest = tree.value
     while current is not None:
-        if abs(target-closest) > abs(target-current.value):
+        if abs(target - closest) > abs(target - current.value):
             closest = current.value
         if target < current.value:
             current = current.left
@@ -10,7 +10,8 @@ def findClosestValueInBst(tree, target):
             current = current.right
         else:  # when target == current.value
             return current.value
-        return closest
+    return closest
+
 
 # This is the class of the input tree. Do not edit.
 
@@ -23,7 +24,7 @@ class BST:
 
 
 # Test
-if __name__ == '__main__':
+if __name__ == "__main__":
     root = BST(10)
     root.left = BST(5)
     root.left.left = BST(2)

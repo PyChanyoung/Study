@@ -1,10 +1,13 @@
 def LIS_length(array):
     array.reverse()
+    # print(array)
     dp = [1] * len(array)
+    # print(dp)
     for i in range(1, len(array)):
         for j in range(0, i):
             if array[j] < array[i]:
-                dp[i] = max(dp[i], dp[j]+1)
+                dp[i] = max(dp[i], dp[j] + 1)
+                # print(dp)
     return len(array) - max(dp)
 
 
