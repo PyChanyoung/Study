@@ -27,9 +27,9 @@ In order for multiple programs to listen for new network connections on the same
 </br>
 Typically, ports 0-1023 are reserved for system ports (also called well-known ports) and shouldn’t be used by user-level processes. Certain ports have pre-defined uses, and although you usually won’t be required to have them memorized, they can sometimes come in handy. Below are some examples:
 </br>
-22: Secure Shell
-53: DNS lookup
-80: HTTP
+22: Secure Shell</br>
+53: DNS lookup</br>
+80: HTTP</br>
 443: HTTPS
 
 ## DNS
