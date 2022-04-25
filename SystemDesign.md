@@ -49,7 +49,7 @@ TCP is usually implemented in the kernel, which exposes **sockets** to applicati
 
 ## HTTP
 
-The **H** yper **T** ext **T** ransfer **P** rotocol is a very common network protocol implemented on top of TCP. Clients make HTTP requests, and servers respond with a response.
+The **H**yper**T**ext**T**ransfer**P**rotocol is a very common network protocol implemented on top of TCP. Clients make HTTP requests, and servers respond with a response.
 </br>
 Requests typically have the following schema:
 </br>
