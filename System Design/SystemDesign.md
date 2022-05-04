@@ -136,6 +136,8 @@ For example, increasing an integer value in a database is not an idempotent oper
 
 ## MapReduce
 
+**Background** : Early 2000s, Google engineers faced a problem that data sets are getting incredibly larger, and there’s only so much vertical scaling possible. You eventually have to horizontally scale your system by adding more machines. When dealing with a distributed system, otherwise simple tasks like processing a dataset become very difficult.
+
 A popular framework for processing very large datasets in a distributed setting efficiently, quickly, and in a fault-tolerant manner. A MapReduce job is comprised of 3 main steps:
 
 - **Map** step : Runs a <u>map function</u> on the various chunks of the dataset and transforms these chunks into intermediate <u>key-value pairs.</u>
@@ -144,6 +146,27 @@ A popular framework for processing very large datasets in a distributed setting 
 
 The canonical example of a MapReduce use case is counting the number of occurrences of words in a large text file.
 When dealing with a MapReduce library, engineers and/or systems administrators only need to worry about the map and reduce functions, as well as their inputs and outputs. All other concerns, including the parallelization of tasks and the fault-tolerance of the MapReduce job, are abstracted away and taken care of by the MapReduce implementation.
+
+Important Notes :
+(1) Distributed File System : when dealing with a MapReduce model, we assume that we have a distributed system where large datasets are split up into chunks, and these chunks are replicated and spread across multiple machines.
+
+    - This system has a central control plane that is aware of everything going on in the MapReduce job/process. It knows :
+        - Where all of the chunks of data reside
+        - How to communicate with various machines that store all of this data
+        - How to communicate with the machines that are gonna be performing the Map operations (‘Worker Machines’)
+        - How to communicate with reduce workers
+        - Where the output is going to live
+
+(2) We do NOT want to move the large data sets. We’d like to let them live where they currently reside on their respective machines, but rather have our Map programs move to the data and operate on the data locally. Instead of grabbing all the data and moving them elsewhere, we send the Map program to the data.
+
+(3) Key-value (KV) pairs structure of the data (in the intermediate step). When you ‘reduce’ data (which by the way are multiple chunks of the same large data set), you’ll notice some sort of commonality in these pieces of data. The key-value pair structure is useful because there will be some keys that are going to be common, and they can aggregate and reduce data in one single meaningful value.
+
+(4) Handling fault. When there’s a network/machine failure (for one of the chunks), a MapReduce job is going to re-perform a Map or Reduce operation where a failure occurred.
+
+    - The central control plane will orchestrate this (reperforming).
+    - Map/Reduce functions are idempotent. In other words, if we repeat a Map/Reduce function, the result will be the same regardless of how many times we’ve repeated.
+
+(5) You as an engineer or systems administrator only need to worry about the map and reduce functions, as well as their inputs and outputs. All other concerns, including the parallelization of tasks and the fault-tolerance of the MapReduce job, are abstracted away and taken care of by the MapReduce implementation.
 
 ## Distributed File System (DFS)
 
