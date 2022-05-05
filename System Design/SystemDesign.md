@@ -1,4 +1,4 @@
-# Internet Protocol
+# Client-Server Model
 
 ## Client
 
@@ -39,6 +39,8 @@ Typically, ports 0-1023 are reserved for system ports (also called well-known po
 
 Short for Domain Name System, it describes the entities and protocols involved in the translation from domain names to IP addresses. Typically, machines make a DNS query to a well-known entity which is responsible for returning the IP address (or multiple ones) of the requested domain name in the response.
 
+# Network Protocol
+
 ## IP
 
 Stands for **Internet Protocol.** This network protocol outlines how almost all machine-to-machine communications should happen in the world. Other protocols like **TCP, UDP** and **HTTP** are built on top of IP.
@@ -47,6 +49,7 @@ Stands for **Internet Protocol.** This network protocol outlines how almost all 
 
 Network protocol built on top on the Internet Protocol (IP). Allows for ordered, reliable data delivery between machines over the public internet by creating a **connection.**
 </br>
+
 TCP is usually implemented in the kernel, which exposes **sockets** to applications that they can use to stream data through an open connection.
 
 ## HTTP
