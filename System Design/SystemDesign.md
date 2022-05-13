@@ -135,6 +135,19 @@ Certain types of systems really care about latencies (e.g., multiplayer games), 
 
 # Availability
 
+## Definition
+
+The odds of a particular server or service being up and running at any point in time, usually measured in percentages.
+
+- How resistant is your system to failures?
+- The percentage of time (in a given period of time) the system is at least operational enough such that all of its primary functions are satisfied.
+- (ex) A server that has 99% availability will be operational 99% of the time (this would be described as having two nines of availability)
+
+## Key points
+
+- There is an implied guarantee of availability when using modern services.
+- For certain types of services (e.g., Cloud Provider, Youtube), ouages are super critical.
+
 ## Process
 
 A program that is currently running on a machine. You should always assume that any process may get terminated at any time in a sufficiently large system.
@@ -154,35 +167,40 @@ Sometimes the work **server** also refers to this same concept.
 
 The odds of a particular server or service being up and running at any point in time, usually measured in percentages. A server that has 99% availability will be operational 99% of the time (this would be described as having two **nines** of availability).
 
-## High Availability
-
-Used to describe systems that have particulary high levels of availability, typically 5 nines or more; sometimes abbreviated "HA".
-
 ## Nines
 
 Typically refers to percentages of uptime. For example, 5 nines of availability means an uptime of 99.999% of the time. Below are the downtimes expected per year depending on those 9s:
 
 ```
-- 99% (two 9s): 87.7 hours
+- 99% (two 9s): 87.7 hours (3.65 days) - This is still quite bad and borderline unacceptable
 - 99.9%(three 9s): 8.8 hours
 - 99.99%: 52.6 minutes
-- 99.999%: 5.3 minutes
+- 99.999%: 5.3 minutes - Five nines of availability is typically regarded as the gold standard of availability, AKA High Availability
 ```
 
-## Redundancy
+## High Availability
 
-The process of replicating parts of a system in an effort to make it more reliable.
+Used to describe systems that have particulary high levels of availability, typically 5 nines or more; sometimes abbreviated "HA".
 
 ## SLA (Service-level Agreement)
 
-SLA is a collection of guarantees given to a customer by a service provider.
-SLAs typically make guarantees on a system’s availability, amongst other things.
-SLAs are made up of one or multiple SLOs.
+- SLA is a collection of guarantees given to a customer by a service provider.
+- SLAs typically make **explicit guarantees** on a system’s availability, amongst other things. (e.g., telling customers that we guarantee you x percentage of uptime in our system)
+- SLAs are made up of one or multiple SLOs.
+- Cloud providers have very clear-cut of SLA.
 
 ## SLO (Service-level Objective)
 
-SLO is a guarantee given to a customer by a service provides. SLOs typically make guarantees on a system’s availability, amongst other things.
-SLOs constitute SLA
+- SLO is a guarantee given to a customer by a service provider.
+- SLOs typically make guarantees on a system’s availability, amongst other things. (e.g., the percentage of uptime gurantee or x number of errors in the system are examples of SLO)
+- SLOs constitute SLA. **SLO component of an SLA**
+- How to improve availability?
+  - The same question as 'How do you eliminate single points of failure with redundancy?
+  - **Redundancy** : The process of replicating parts of a system in an effort to make it more reliable.
+    - Passive Redundancy : When you gain redundancy by adding multiple components at a given layer in your system. If one of the components die, the others can help continue running smoothly.
+    - Active Redundancy : Multiple machines work in such a way that only one or a few machines are typically handling traffic or doing work (active). If one of these fails, other machines will know that it failed and going to take over the work.
+  - If you only have one server, that service can become a single point of failure. If you add more servers, then you’d need a load balancer. Yet, now the load balancer can be the single point of failure. So, you can then have redundancy at the load balancer layer in your system.
+    - (ex) AlgoExpert has 5 load balancers that take in all user traffics and forward that traffic to our servers
 
 # MapReduce
 
