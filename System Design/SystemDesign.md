@@ -112,6 +112,8 @@ Data stored in memory will be lost when the process that has written that data d
 
 Usually refers to disk, but in general it is any form of storage that persists if the process in charge of managing it dies.
 
+# Latency and Throughput
+
 ## Latency
 
 The time it takes for a certain operation to complete in a system. Most often measure is a time duration, like milliseconds or seconds. You should know these orders of magnitude:
