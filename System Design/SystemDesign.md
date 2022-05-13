@@ -122,9 +122,14 @@ The time it takes for a certain operation to complete in a system. Most often me
 - Reading 1MB from HDD: 20,000us(20ms)
 - Inter-Continental Round Trip: 150,000us(150ms)
 
+Certain types of systems really care about latencies (e.g., multiplayer games), while other websites care less about latencies but care more about accuracy or up-time (never going down).
+
 ## Throughput
 
-The number of operations that a system can handle properly per time unit. For instance the throughput of a server can often be measured in requests per second (RPS or QPS).
+- The number of operations that a system can handle properly per time unit. How much data can be transferred from one point in a system to another in a given amount of time.
+- Measurement: For instance the throughput of a server can often be measured in requests per second (RPS or QPS). Typically, in gigabits per second (Gbps) or Kbps or Mbps.
+- Can increase throughput by paying more (e.g., to a cloud provider).
+- Latency and throughput seem related, but they are **NOT correlated**. You cannot make assumption about latency or throughput based on the other.
 
 # MapReduce
 
