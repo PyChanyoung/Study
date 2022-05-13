@@ -129,7 +129,7 @@ Certain types of systems really care about latencies (e.g., multiplayer games), 
 - The number of operations that a system can handle properly per time unit. How much data can be transferred from one point in a system to another in a given amount of time.
 - Measurement: For instance the throughput of a server can often be measured in requests per second (RPS or QPS). Typically, in gigabits per second (Gbps) or Kbps or Mbps.
 - Can increase throughput by paying more (e.g., to a cloud provider).
-- Latency and throughput seem related, but they are **NOT correlated**. You cannot make assumption about latency or throughput based on the other.
+- Latency and throughput seem related, but they are **NOT correlated**. You CANNOT make assumption about latency or throughput based on the other.
 
 # MapReduce
 
