@@ -257,6 +257,24 @@ How a **load balancer** chooses servers when distributing traffic amongst multip
 
 When distributing a workload across a set of servers, that workload might be spread unevenly. This can happen if your **sharding key** or your **hashing function** are suboptimal, or if your workload is naturally skewed: some servers will receive a lot more traffic than others, thus creating a "hot spot".
 
+# Hashing
+
+## Hashing Function
+
+A function that takes in a specific data type(such as a string or an identifier) and outputs a number. Different inputs _may_ have the same output, but a good hashing function attempts to minimize those **hashing collisions** (which is equivalent to maximizing **uniformity**).
+
+## Consistent Hashing
+
+A type of hashing that minimizes the number of keys that need to be remapped when a hash table gets resized. It's often used by load balancers to distribute traffic to servers; it minimizes the number of requests that get forwarded to different servers when new servers are added or when existing servers are brought down.
+
+## Rendezvous Hashing
+
+A type of hashing also coined **highest ramdom weight** hashing. Allows for minimal re-distribution of mappings when a server goes down.
+
+## SHA
+
+Short for "Secure Hash Algorithms", the SHA is a collection of cryptographic hash functions used in the industry. These days, SHA-3 is a popular choice to use in a system.
+
 # MapReduce
 
 ## File System
