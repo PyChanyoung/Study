@@ -202,6 +202,61 @@ Used to describe systems that have particulary high levels of availability, typi
   - If you only have one server, that service can become a single point of failure. If you add more servers, then you’d need a load balancer. Yet, now the load balancer can be the single point of failure. So, you can then have redundancy at the load balancer layer in your system.
     - (ex) AlgoExpert has 5 load balancers that take in all user traffics and forward that traffic to our servers
 
+# Caching
+
+## Cache
+
+A piece of hardware or software that stores data, typically meant to retrieve that data faster than otherwise.
+
+Caches are often used to store responses to network requests as well as results of computationally-long operations.
+
+Note that data in a cache can become **stale** if the main source of truth for that data(i.e., the main database behind the cache) gets updated and the cache doesn't.
+
+## Cache Hit
+
+When requested data is found in a cache.
+
+## Cache Miss
+
+When requested data could have been found in a cache but isn't. This is typically used to refer to a negative consequence of a system failure or of a poor design choice. For example:
+_If a server goes down, our load balancer will have to forward requests to a new server, which will result in cache misses._
+
+## Cache Eviction Policy
+
+The policy by which values get evicted or removed from a cache. Popular cache eviction policies include **LRU** (least-recently used), **FIFO** (first in first out), and **LFU** (least-frequently used).
+
+## Content Delivery Network (CDN)
+
+A **CDN** is a third-party service that acts like a cache for your servers. Sometimes, web applications can be slow for users in a particular region if your servers are located only in another region. A CDN has servers all around the world, meaning that the latency to a CDN’s servers will almost always be far better than the latency to your servers. A CDN’s servers are often referred to as **PoPs** (Points of Presence). Two of the most popular CDNs are **CloudFlare** and **Google Cloud CDN**.
+
+# Proxies
+
+## Forward Proxy
+
+A server that sits between a client and serers and acts on behalf of the client, typically used to mask the client's identity(IP address). Note that forward proxies are often reffered to as just proxies.
+
+## Reverse Proxy
+
+A server that sits between clients and servers and acts on behalf of the servers, typically used for logging, load balancing, or caching.
+
+## Nginx
+
+Pronounced "engine X"-- not "N jinx", Nginx is a very peopular webserver that's often used as a **reverse proxy** and **load balancer**.
+
+# Load balancers
+
+## Load Balancer
+
+A type of **reverse proxy** that distributes traffic across servers. Load balancers can be found in many parts of a system, from the DNS layer all the way to the database layer.
+
+## Server-Selection Strategy
+
+How a **load balancer** chooses servers when distributing traffic amongst multiple servers. Commonly used strategies include round-robin, random selection, performance-based selection (choosing the server with the best performance metrics, like the fastest response time or the least amount of traffic), and IP-based routing.
+
+## Hot Spot
+
+When distributing a workload across a set of servers, that workload might be spread unevenly. This can happen if your **sharding key** or your **hashing function** are suboptimal, or if your workload is naturally skewed: some servers will receive a lot more traffic than others, thus creating a "hot spot".
+
 # MapReduce
 
 ## File System
