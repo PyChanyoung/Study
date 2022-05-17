@@ -206,11 +206,22 @@ Used to describe systems that have particulary high levels of availability, typi
 
 ## Cache
 
-A piece of hardware or software that stores data, typically meant to retrieve that data faster than otherwise.
+- **Definition** : A piece of hardware or software that stores data, typically meant to retrieve that data faster than otherwise.
 
-Caches are often used to store responses to network requests as well as results of computationally-long operations.
-
-Note that data in a cache can become **stale** if the main source of truth for that data(i.e., the main database behind the cache) gets updated and the cache doesn't.
+- **Notes**
+  - Caching helps **avoiding redoing the same operations** and **reduce/improve the latency of a system**
+  - Caching stores data in a location that's different from the one where the data originally is such that it's faster to retrieve this data from the new location
+  - You can cache data at different levels(client, server, database, or even hardware)
+    - (ex) You can have caching at the client-level (server-level) so that you no longer have to go to the server-level (database-level) to retrieve it.
+    - There are lots of caches even at hardware level. (ex) CPU caches make it faster to retrieve data from memory
+  - Some instances where caching is really helpful:
+    - 1. **Network requests**: some network requests can be repetitive, and storing responses to requests (caching) can speed up the system response
+    - 2. **Computationally-long operations**
+    - 3. **Multiple servers/clients**: When multiple servers _hit the database_ with the same network request (e.g., a celebrity's instagram photo), caching at server or database levels can be helpful to **prevent reading the same info from the database too many times** and overloading it.
+      - The goal here isn't to speed up the system because a network request itself is already fast enough
+  - Examples:
+    - **Questions List on AlgoExpert**: If you go to the question list on AlgoExpert, you'll see a loading icon for a split second.Then, if you go to another page (without closing the browser) and come back to the question list page, the icon is no longer there. ==> They cache the question list on **the client** because it is a static piece of content (the same every time you get it).
+  - Data in a cache can become **stale** if the main source of truth for that data(i.e., the main database behind the cache) gets updated and the cache doesn't.
 
 ## Cache Hit
 
