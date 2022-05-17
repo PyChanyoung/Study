@@ -242,13 +242,27 @@ A **CDN** is a third-party service that acts like a cache for your servers. Some
 
 # Proxies
 
-## Forward Proxy
+**2 Types of Proxy** : Forward Proxy, Reverse Proxy
 
-A server that sits between a client and serers and acts on behalf of the client, typically used to mask the client's identity(IP address). Note that forward proxies are often reffered to as just proxies.
+## **Forward Proxy** (Often reffered to as just **Proxy**)
 
-## Reverse Proxy
+- **Definition** : Server that sits between a client and serers and acts **on behalf of the client**
+- **Perks** : To **mask the client's identity(IP address)**.
+- (ex) request order: client -> (forward) proxy -> server
+  - When the forward proxy _forwards_ the request to the server, the source IP address in the request is going to be that of the forward proxy (NOT the client's IP)
+  - This is basically **how many VPNs work**
 
-A server that sits between clients and servers and acts on behalf of the servers, typically used for logging, load balancing, or caching.
+## **Reverse Proxy**
+
+- **Definition** : Server that sits between clients and servers and acts **on behalf of the servers**
+- **Perks** : Reverse Proxy is Particularly, useful when designing a complex system
+  - **Load Balancer** : maybe the best case. Distribute multiple requests across servers following a certain pattern
+  - **Logging** and gathering metrics
+  - **Caching** (e.g., HTML pages)
+  - Security : no single serer receives all of the requests and gets taken by a malicious client
+  - You can set up a reverse proxy in a way that it filters out requests that you want to ignore
+- The client doesn't know/see that a reverse proxy exists, and thinks that it's only interacting with the server
+- (ex) When your browser (client) makes a DNS query (e.g., AlgoExpert.io), it gets the reverse proxy's IP address as the destination, and then the reverse proxy forwards/reroutes the request to the server with IP address.
 
 ## Nginx
 
