@@ -16,7 +16,7 @@ Note that a single machine or piece of software can be both a client and a serve
 
 ### Client-Server Model
 
-The paradigm by which modern systems are desinged, which consists of clients requesting data or service from servers and servers providing data or service to clients.
+The paradigm by which modern systems are designed, which consists of clients requesting data or service from servers and servers providing data or service to clients.
 
 ### IP Address
 
@@ -319,7 +319,7 @@ Note that a single machine or piece of software can be both a client and a serve
 
 ### Forward Proxy (Often reffered to as just **Proxy**)
 
-- **Definition** : Server that sits between a client and serers and acts **on behalf of the client**
+- **Definition** : Server that sits between a client and servers and acts **on behalf of the client**
 - **Perks** : To **mask the client's identity(IP address)**.
 - (ex) request order: client -> (forward) proxy -> server
   - When the forward proxy _forwards_ the request to the server, the source IP address in the request is going to be that of the forward proxy (NOT the client's IP)
@@ -339,7 +339,7 @@ Note that a single machine or piece of software can be both a client and a serve
 
 ### Nginx
 
-Pronounced "engine X"-- not "N jinx", Nginx is a very peopular webserver that's often used as a **reverse proxy** and **load balancer**.
+Pronounced "engine X"-- not "N jinx", Nginx is a very popular webserver that's often used as a **reverse proxy** and **load balancer**.
 
 # 10. Load balancers
 
@@ -373,7 +373,7 @@ When distributing a workload across a set of servers, that workload might be spr
 
 ### Nginx
 
-Pronounced "engine X"-- not "N jinx", Nginx is a very peopular webserver that's often used as a **reverse proxy** and **load balancer**.
+Pronounced "engine X"-- not "N jinx", Nginx is a very popular webserver that's often used as a **reverse proxy** and **load balancer**.
 
 # 11. Hashing
 
@@ -395,7 +395,7 @@ A type of hashing that minimizes the number of keys that need to be remapped whe
 
 ### Rendezvous Hashing
 
-A type of hashing also coined **highest ramdom weight** hashing. Allows for minimal re-distribution of mappings when a server goes down.
+A type of hashing also coined **highest random weight** hashing. Allows for minimal re-distribution of mappings when a server goes down.
 
 ### SHA
 
@@ -578,7 +578,7 @@ A tree data structure most commonly used to index two-dimensional spatial data. 
 
 Typically, quadtree nodes contain some form of spatial data - for example, locations on a map - with a maximum capacity of some specified number **n**. So long as nodes aren't at capacity, they remain leaf nodes; once they reach capacity, they're given four children nodes, and their data entries are split across the four children nodes.
 
-A quadtree lends itself well to storing spatial data becuase it can be represented as a grid filled with rectangles that are recursively subdivided into four sub-rectangles, where each quadtree node is represented by a rectangle and each rectangle represents a spatial region. Assuming we're storing locations in the world, we can imagine a quadtree with a maximum node-capacity **n** as follows:
+A quadtree lends itself well to storing spatial data because it can be represented as a grid filled with rectangles that are recursively subdivided into four sub-rectangles, where each quadtree node is represented by a rectangle and each rectangle represents a spatial region. Assuming we're storing locations in the world, we can imagine a quadtree with a maximum node-capacity **n** as follows:
 
 - The root node, which represents the entilre world, is the outermost rectangle.
 - If the entire world has more than **n** locations, the outermost rectangle is divided into four quadrants, each representing a region of the world.
@@ -733,7 +733,7 @@ ZooKeeper is a strongly consistent, highly available key-value store. it's often
 
 ### Client-Server Model
 
-The paradigm by which modern systems are desinged, which consists of clients requesting data or service from servers and servers providing data or service to clients.
+The paradigm by which modern systems are designed, which consists of clients requesting data or service from servers and servers providing data or service to clients.
 
 ### Throughput
 
