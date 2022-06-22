@@ -1,4 +1,4 @@
-# Client-Server Model
+# 3. Client-Server Model
 
 ## 6 Key Terms
 
@@ -40,7 +40,7 @@ Typically, ports 0-1023 are reserved for system ports (also called well-known po
 
 Short for Domain Name System, it describes the entities and protocols involved in the translation from domain names to IP addresses. Typically, machines make a DNS query to a well-known entity which is responsible for returning the IP address (or multiple ones) of the requested domain name in the response.
 
-# Network Protocols
+# 4. Network Protocols
 
 ## 3 Prerequisites
 
@@ -83,7 +83,7 @@ Requests typically have the following schema:
 
 ```
 host: string (example: algoexpert.io)
-port: ilnteger (example: 80 or 443)
+port: integer (example: 80 or 443)
 method: string (example: GET, PUT, POST, DELETE, OPTIONS or PATCH)
 path: string
 headers: pair list (example: "Content-Type" => "application/json")
@@ -105,9 +105,9 @@ Sometimes more broadly referred to as just a (network) **packet,** an IP packet 
 - an **IP header,** which contains the source and destination **IP addresses** as well as other information related to the network (e.g., total size of the packet, version of the internet protocol that this IP packet is operating by: IPv4 or IPv6). It's usually between 20 and 60 bytes (smaller portion than main data).
 - a **payload,** which is just the data being sent over the network
 
-One IP packets are only two to the power of 16 (2^16) bytes: ~65,000 bytes or ~0.065MB. - This is pretty small considering that you sometimes send an email or big files. So, you'd have to send multiple packets. - **Problem with sending multiple files**: if all you're using is the Internet Protocol, there's <u>NO way of guaranteeing that these packets are acually (1) gonna be received (2) in correct order.</u> - ==> **this is where TCP comes into play**
+One IP packets are only two to the power of 16 (2^16) bytes: ~65,000 bytes or ~0.065MB. - This is pretty small considering that you sometimes send an email or big files. So, you'd have to send multiple packets. - **Problem with sending multiple files**: if all you're using is the Internet Protocol, there's <u>NO way of guaranteeing that these packets are actually (1) gonna be received (2) in correct order.</u> - ==> **this is where TCP comes into play**
 
-# Storage
+# 5. Storage
 
 ## 4 Key Terms
 
@@ -136,7 +136,7 @@ Data stored in memory will be lost when the process that has written that data d
 
 Usually refers to disk, but in general it is any form of storage that persists if the process in charge of managing it dies.
 
-# Latency and Throughput
+# 6. Latency and Throughput
 
 ## 2 Prerequisites
 
@@ -170,7 +170,7 @@ Certain types of systems really care about latencies (e.g., multiplayer games), 
 - Can increase throughput by paying more (e.g., to a cloud provider).
 - Latency and throughput seem related, but they are **NOT correlated**. You CANNOT make assumption about latency or throughput based on the other.
 
-# Availability
+# 7. Availability
 
 ## 3 Prerequisites
 
@@ -234,7 +234,7 @@ The process of replicating parts of a system in an effort to make it more reliab
   - If you only have one server, that service can become a single point of failure. If you add more servers, then you’d need a load balancer. Yet, now the load balancer can be the single point of failure. So, you can then have redundancy at the load balancer layer in your system.
     - (ex) AlgoExpert has 5 load balancers that take in all user traffics and forward that traffic to our servers
 
-# Caching
+# 8. Caching
 
 ## 3 Prerequisites
 
@@ -299,7 +299,7 @@ The policy by which values get evicted or removed from a cache. Popular cache ev
 
 A **CDN** is a third-party service that acts like a cache for your servers. Sometimes, web applications can be slow for users in a particular region if your servers are located only in another region. A CDN has servers all around the world, meaning that the latency to a CDN’s servers will almost always be far better than the latency to your servers. A CDN’s servers are often referred to as **PoPs** (Points of Presence). Two of the most popular CDNs are **CloudFlare** and **Google Cloud CDN**.
 
-# Proxies
+# 9. Proxies
 
 ## 2 Prerequisites
 
@@ -341,7 +341,7 @@ Note that a single machine or piece of software can be both a client and a serve
 
 Pronounced "engine X"-- not "N jinx", Nginx is a very peopular webserver that's often used as a **reverse proxy** and **load balancer**.
 
-# Load balancers
+# 10. Load balancers
 
 ## 1 Prerequisite
 
@@ -375,7 +375,7 @@ When distributing a workload across a set of servers, that workload might be spr
 
 Pronounced "engine X"-- not "N jinx", Nginx is a very peopular webserver that's often used as a **reverse proxy** and **load balancer**.
 
-# Hashing
+# 11. Hashing
 
 ## 2 Prerequisites
 
@@ -401,7 +401,7 @@ A type of hashing also coined **highest ramdom weight** hashing. Allows for mini
 
 Short for "Secure Hash Algorithms", the SHA is a collection of cryptographic hash functions used in the industry. These days, SHA-3 is a popular choice to use in a system.
 
-# Relational Databases
+# 12. Relational Databases
 
 ## 3 Prerequisites
 
@@ -473,7 +473,7 @@ A consistency model which is unlike **Strong Consistency**. In this model, reads
 
 A relational database that uses a dialect of SQL called PostgreSQL. Provides ACID transactions.
 
-# Key-Value Stores
+# 13. Key-Value Stores
 
 ## 2 Prerequisites
 
@@ -503,7 +503,7 @@ An in-memory key-value store. Does offer some persistent storage options but is 
 
 ZooKeeper is a strongly consistent, highly available key-value store. it's often used to store important configuration or to perform leader election.
 
-# Specialized Storage Paradigms
+# 14. Specialized Storage Paradigms
 
 ## 8 Prerequisites
 
@@ -608,18 +608,319 @@ A popular open-source series database, typically used for monitoring purposes.
 
 A popular graph database that consists of **nodes, relationship, properties**, and **labels**.
 
-# MapReduce
+# 15. Replication And Sharding
 
-## File System
+## 6 Prerequisites
+
+### Availability
+
+The odds of a particular server or service being up and running at any point in time, usually measured in percentages. A server that has 99% availability will be operational 99% of the time (this would be described as having two **nines** of availability).
+
+### Latency
+
+The time it takes for a certain operation to complete in a system. Most often measure is a time duration, like milliseconds or seconds. You should know these orders of magnitude:
+
+- **Reading 1MB from RAM**: 250us(0.25ms)
+- **Reading 1MB from SSD**: 1,000us(1ms)
+- **Transfer 1MB over Network**: 10,000us(10ms)
+- **Reading 1MB from HDD**: 20,000us(20ms)
+- **Inter-Continental Round Trip**: 150,000us(150ms)
+
+Certain types of systems really care about latencies (e.g., multiplayer games), while other websites care less about latencies but care more about accuracy or up-time (never going down).
+
+### Throughput
+
+- The number of operations that a system can handle properly per time unit. How much data can be transferred from one point in a system to another in a given amount of time.
+- Measurement: For instance the throughput of a server can often be measured in requests per second (RPS or QPS). Typically, in gigabits per second (Gbps) or Kbps or Mbps.
+- Can increase throughput by paying more (e.g., to a cloud provider).
+- Latency and throughput seem related, but they are **NOT correlated**. You CANNOT make assumption about latency or throughput based on the other.
+
+### Redundancy
+
+The process of replicating parts of a system in an effort to make it more reliable.
+
+### Databases
+
+Data are programs that either use disk or memory to do 2 core things: **record(=store, write)** data and **query (=retrieve, read)** data. In general, they are themselves servers(=Databases are just server) that are long-lived and interact with the rest of your application through network calls, with protocols on top of TCP or even HTTP.
+
+Persistence
+
+- Some databases only keep records in memory, and the users of such databases are aware of the fact that those records may be lost forever if the machine or process dies.
+
+- For the most part though, databases need persistence of those records, and thus cannot use memory. This means that you have to write your data to disk. Anything written to disk will remain through power loss or network partitions, so that's what is used to keep permanent records.
+
+Since machines die often in a large scale system, special disk partitions or volumes are used by the database processes, and those volumes can get recovered even if the machine were to go down permanently.
+
+### Reverse Proxy
+
+- **Definition** : Server that sits between clients and servers and acts **on behalf of the servers**
+- **Perks** : Reverse Proxy is Particularly, useful when designing a complex system
+  - **Load Balancer** : maybe the best case. Distribute multiple requests across servers following a certain pattern
+  - **Logging** and gathering metrics
+  - **Caching** (e.g., HTML pages)
+  - Security : no single serer receives all of the requests and gets taken by a malicious client
+  - You can set up a reverse proxy in a way that it filters out requests that you want to ignore
+- The client doesn't know/see that a reverse proxy exists, and thinks that it's only interacting with the server
+- (ex) When your browser (client) makes a DNS query (e.g., AlgoExpert.io), it gets the reverse proxy's IP address as the destination, and then the reverse proxy forwards/reroutes the request to the server with IP address.
+
+## 3 Key Terms
+
+### Replication
+
+The act of duplicating the data from one database server to others. This is sometimes used to increase the redundancy of your system and tolerate regional failures for instance. Other times you can use replication to move data closer to your clients, thus decreasing the latency of accessing specific data.
+
+### Sharding
+
+Sometimes called **data partitioning**, sharding is the act of splitting a database into two or more pieces called **shard** and is typically done to increase the throughput of your database. Popular sharding strategies include:
+
+- Sharding based on a client's region
+- Sharding based on the type of data being stored (e.g: user data gets stored in one shard, payments data gets stored in another shard)
+- SHarding based on the hash of a column (only for structred data)
+
+### Hot Spot
+
+When distributing a workload across a set of servers, that workload might be spread unevenly. This can happen if your **sharding key** or your **hashing function** are suboptimal, or if your workload is naturally skewed: some severs will receive a lot more traffic than others, thus creating a "hot spot".
+
+# 16. Leader Election
+
+## 5 Prerequisites
+
+### Availability
+
+The odds of a particular server or service being up and running at any point in time, usually measured in percentages. A server that has 99% availability will be operational 99% of the time (this would be described as having two **nines** of availability).
+
+### High Availability
+
+Used to describe systems that have particulary high levels of availability, typically 5 nines or more; sometimes abbreviated "HA".
+
+### Redundancy
+
+The process of replicating parts of a system in an effort to make it more reliable.
+
+### Strong Consistency
+
+Strong Consistency usually refers to the consistency of ACID transactions, as opposed to **Eventually Consistency**.
+
+### Eventually Consistency
+
+A consistency model which is unlike **Strong Consistency**. In this model, reads might return a view of the system that is stale. An eventually consistent datastore will give guarantees that the state of the database will eventually reflect writes within a time period (could be 10 seconds, or minutes.)
+
+## 5 Key Terms
+
+### Leader Election
+
+The process by which nodes in a cluster (for instance, servers in a set of servers) elect a so-called "leader" amongst them, responsible for the primary operations of the service that these nodes support. When correctly implemented, leader election guarantees that all nodes in the cluster know which one is the leader at any given time and can elect a new leader if the leader dies for whatever reason.
+
+### Consensus Algorithm
+
+A type of complex algorithms used to have multiple entities agree on a single data value, like who the "leader" is amongst a group of machines, Two popular consensus algorithms are **Paxos** and **Raft**.
+
+### Paxos & Raft
+
+Two consensus algorithms that, when implemented correctly, allow for the synchronization of certain operations, even in a distributed setting.
+
+### Etcd
+
+Etcd is a strongly consistent and highly available key-value store that's often used to implement leader election in a system.
+
+### ZooKeeper
+
+ZooKeeper is a strongly consistent, highly available key-value store. it's often used to store important configuration or to perform leader election.
+
+# 17. Peer-To-Peer Networks
+
+## 2 Prerequisites
+
+### Client-Server Model
+
+The paradigm by which modern systems are desinged, which consists of clients requesting data or service from servers and servers providing data or service to clients.
+
+### Throughput
+
+- The number of operations that a system can handle properly per time unit. How much data can be transferred from one point in a system to another in a given amount of time.
+- Measurement: For instance the throughput of a server can often be measured in requests per second (RPS or QPS). Typically, in gigabits per second (Gbps) or Kbps or Mbps.
+- Can increase throughput by paying more (e.g., to a cloud provider).
+- Latency and throughput seem related, but they are **NOT correlated**. You CANNOT make assumption about latency or throughput based on the other.
+
+## 2 Key Terms
+
+### Peer-To-Peer Network
+
+A collection of machines referred to as peers that divide a workload between themselves to presumably complete the workload faster than would otherwise be possible. Peer-to-peer networks are often used in file-distribution systems.
+
+### Gossip Protocol
+
+When a set of machines talke to each other in a uncoordinated manner in a cluster to spread information through a system without requiring a central source of data.
+
+# 18. Polling And Streaming
+
+## 2 Prerequisites
+
+### Client-Server Model
+
+The paradigm by which modern systems are designed, which consists of clients requesting data or service from servers and servers providing data or service to clients.
+
+### Socket
+
+A kind of file that acts like a stream. Processes can read an write to sockets and communicate in this manner. Most of the time the sockets are fronts for TCP connection.
+
+## 2 Key Terms
+
+### Polling
+
+The act of fetching a resource or piece of data regularly at an interval to make sure your data is not too stale.
+
+### Streaming
+
+In networking, it usually refers to the act of continuously getting a feed of information from a server by keeping an open connection between the two machines or processes.
+
+# 19. Configuration
+
+## 3 Prerequisites
+
+### JSON
+
+A file format heavily used in APIs and configuration. Stands for **J**ava**S**cript **O**bject **N**otation. Example:
+
+```
+{
+  "version": 1.0,
+  "name": "AlgoExpert Configuration"
+}
+```
+
+### YAML
+
+A file format mostly used in configuration. Example:
+
+```
+version: 1.0
+name: AlgoExpert Configuration
+```
+
+### Key-Value Store
+
+A Key-Value Store is a flexible NoSQL database that's often used for caching and dynamic configuration. Popular options include DynamoDB, Etcd, Redis, and ZooKeeper.
+
+## 1 Key Term
+
+### Configuration
+
+A set of parameters or constants that are critical to a system. Configuration is typically written in **JSON** or **YAML** and can be either **static**, meaning that it's hard-coded in and shipped with your system's application code (like frontend code, for instance), or **dynamic**, meaning that it lives outside of your system's application code.
+
+# 20. Rate Limiting
+
+### 2 Prerequisites
+
+### Availability
+
+The odds of a particular server or service being up and running at any point in time, usually measured in percentages. A server that has 99% availability will be operational 99% of the time (this would be described as having two **nines** of availability).
+
+### Key-Value Store
+
+A Key-Value Store is a flexible NoSQL database that's often used for caching and dynamic configuration. Popular options include DynamoDB, Etcd, Redis, and ZooKeeper.
+
+## 4 Key Terms
+
+### Rate Limiting
+
+The act of limiting the number of requests sent to or from a system. Rate limiting is most often used to limit the number of incoming requests in order to prevent **DoS attacks** and can be enforced at the IP-address level, at the user-account level, or at the region level, for example. Rate limiting can also be implemented in tiers; for instance, a type of network request could be limited to 1 per second, 5 per 10 seconds, and 10 per minute.
+
+### DoS Attack
+
+Short for "denial-of-service attack", a DoS attack is an attack in which a malcious user tries to bring down or damage a system in order to render it unavailable to users. Much of the time, it consists of flooding it with traffic. Some DoS attacks are easily preventable with rate limiting, while others can be far trickier to defend against.
+
+### DDoS Attack
+
+Short for "distributed denial-of-service attack", a DDoS attack is a DoS attack in which the traffic flooding the target system comes from many different sources (like thousands of machines), making it much harder to defend against.
+
+### Redis
+
+An in-memory key-value store. Does offer some persistent storage options but is typically used as a really fast, best-effort caching solution. Redis is also often used to implement **rate limiting**.
+
+# 21. Logging And Monitoring
+
+## 1 Prerequisite
+
+### JSON
+
+A file format heavily used in APIs and configuration. Stands for **J**ava**S**cript **O**bject **N**otation. Example:
+
+```
+{
+  "version": 1.0,
+  "name": "AlgoExpert Configuration"
+}
+```
+
+## 3 Key Terms
+
+### Logging
+
+The act of collecting and storing logs--useful information about events in your system. Typically your programs will output log messages to its STDOUT or STDERR pipes, which will automatically get aggregated into a **centralized logging solution**.
+
+### Monitoring
+
+The process of having visibility into a system's key metrics, monitoring is typically implemented by collecting important events in a system and aggregating them in human-readable charts.
+
+### Alerting
+
+The process through which system administrators get notified when critical system issues occur. Alerting can be set up by defining specific thresholds on monitoring charts, past which alerts are sent to a communication channel like Slack.
+
+# 22. Publish/Subscribe Pattern
+
+## 3 Prerequisites
+
+### Polling
+
+The act of fetching a resource or piece of data regularly at an interval to make sure your data is not too stale.
+
+### Streaming
+
+In networking, it usually refers to the act of continuously getting a feed of information from a server by keeping an open connection between the two machines or processes.
+
+### Persistent Storage
+
+Usually refers to disk, but in general it is any form of storage that persists if the process in charge of managing it dies.
+
+## 4 Key Terms
+
+### Publish/Subscribe Patter
+
+Often shortened as **Pub/Sub**, the Publish/Subscribe pattern is a popular messaging model that consists of **publishers** and **subscribers**. Publishers publish message to special **topics** (sometimes called **channels**) without caring about or even knowing who will read those messages, and subscribers subscribe to topics and read messages coming through those topics.
+
+Pub/Sub systems often come with very powerful guarantees like **at-least-once delivery, persistent storage, ordering** of messages, and **replayability** of messages.
+
+### Idempotent Operation
+
+An operation that has the same ultimate outcome regardless of how many times it's performed. If an operation can be performed multiple times without changing its overall effect, it's idempotent. Operations performed through a **Pub/Sub** messaging system typically have to be idempotent, since Pub/Sub systems tend to allow the same messages to be consumed multiple times.
+
+For example, increasing an integer value in a database is _not_ an idempotent operation, since repeating this operation will not have the same effect as if it had been performed only once. Conversely, setting a value to "COMPLETE" _is_ an idempotent operation, since repeating this operation will always yield the same result: the value will be "COMPLETE".
+
+### Apache Kafka
+
+A distributed messaging system created by LinkedIn. Very useful when using the **streaming** paradigm as opposed to **polling**.
+
+### Cloud Pub/Sub
+
+A highly-scalable Pub/Sub messaging service created by Google. Guarantees **at-least-once delivery** of messages and supports "rewinding" in order to reprocess messages.
+
+# 23. MapReduce
+
+## 2 Prerequisites
+
+### File System
 
 An abstraction over a storage medium that defines how to manage data. While there exist many different types of file systems, most follow a hierarchical structure that consists of directories and files, like the <u>Unix file system’s</u> structure.
 
-## Idempotent Operation
+### Idempotent Operation
 
 An operation that has the same ultimate outcome regardless of how many times it’s performed. If an operation can be performed multiple times without changing its overall effect, it’s idempotent. Operations performed through a **Pub/Sub** messaging system typically have to be idempotent, since Pub/Sub systems tend to allow the same messages to be consumed multiple times.
 For example, increasing an integer value in a database is not an idempotent operation, since repeating this operation will not have the same effect as if it had been performed only once. Conversely, setting a value to “COMPLETE” is an idempotent operation, since repeating this operation will always yield the same result: the value will be “COMPLETE”.
 
-## MapReduce
+## 3 Key Terms
+
+### MapReduce
 
 **Background** : Early 2000s, Google engineers faced a problem that data sets are getting incredibly larger, and there’s only so much vertical scaling possible. You eventually have to horizontally scale your system by adding more machines. When dealing with a distributed system, otherwise simple tasks like processing a dataset become very difficult.
 
@@ -653,12 +954,182 @@ Important Notes :
 
 (5) You as an engineer or systems administrator only need to worry about the map and reduce functions, as well as their inputs and outputs. All other concerns, including the parallelization of tasks and the fault-tolerance of the MapReduce job, are abstracted away and taken care of by the MapReduce implementation.
 
-## Distributed File System (DFS)
+### Distributed File System (DFS)
 
 A DFS is an abstraction over a (usually large) cluster of machines that allows them to act like one large file system. The two most popular implementations of a DFS are the **Google File System** (GFS) and the **Hadoop Distributed File System** (HDFS).
 Typically, DFSs take care of the classic <u>availability</u> and <u>replication</u> guarantees that can be tricky to obtain in a distributed system setting. The overarching idea is that files are split into chunks of a certain size (4MB or 64MB, for instance), and those chunks are sharded across a large cluster of machines. A central control plane is in charge of deciding where each chunk resides, routing reads to the right nodes, and handling communication between machines.
 Different DFS implementations have slightly different APIs and semantics, but they achieve the same common goal: extremely large-scale persistent storage.
 
-## Hadoop
+### Hadoop
 
 A popular, open-source framework that supports MapReduce jobs and many other kinds of data-processing pipelines. Its central component is HDFS (Hadoop Distributed File System), on top of which other technologies have been developed.
+
+# 24. Security And HTTPS
+
+## 4 Prerequisites
+
+### Client
+
+A machine or process that requests data or service from a server.
+
+Note that a single machine or piece of software can be both a client and a server at the same time. For instance, a single machine could act as a server for end users and as a client for a database.
+
+### Server
+
+A machine or process that provides data or service for a client, usually by listening for incoming network calls.
+
+Note that a single machine or piece of software can be both a client and a server at the same time. For instance, a single machine could act as a server for end users and as a client for a database.
+
+### IP Packet
+
+Sometimes more broadly referred to as just a (network) **packet,** an IP packet is effectively the smallest unit used to describe data being sent over **IP,** aside from bytes. An IP packet consists of:
+
+- an **IP header,** which contains the source and destination **IP addresses** as well as other information related to the network (e.g., total size of the packet, version of the internet protocol that this IP packet is operating by: IPv4 or IPv6). It's usually between 20 and 60 bytes (smaller portion than main data).
+- a **payload,** which is just the data being sent over the network
+
+One IP packets are only two to the power of 16 (2^16) bytes: ~65,000 bytes or ~0.065MB. - This is pretty small considering that you sometimes send an email or big files. So, you'd have to send multiple packets. - **Problem with sending multiple files**: if all you're using is the Internet Protocol, there's <u>NO way of guaranteeing that these packets are actually (1) gonna be received (2) in correct order.</u> - ==> **this is where TCP comes into play**
+
+### HTTP
+
+The **H**yper**T**ext**T**ransfer**P**rotocol is a very common network protocol implemented on top of TCP. Clients make HTTP requests, and servers respond with a response.
+
+Requests typically have the following schema:
+
+```
+host: string (example: algoexpert.io)
+port: integer (example: 80 or 443)
+method: string (example: GET, PUT, POST, DELETE, OPTIONS or PATCH)
+path: string
+headers: pair list (example: "Content-Type" => "application/json")
+body: opaque sequence of bytes
+```
+
+Responses typically have the following schema:
+
+```
+status code: integer (example: 200, 401)
+headers: pair list (example: "Content-Length" => 1238)
+body: opaque sequence of bytes
+```
+
+## 9 Key Terms
+
+### Man-In-The-Middle Attack
+
+An attack in which the attacker intercepts a line of communication that is thought to be private by its two communicating parties.
+
+If a malicious actor intercepted and mutated an IP packet on its way from a client to a server, that would be a man-in-the-middle attack.
+
+MITM attacks are the primary threat that encryption and **HTTPS** aim to defend against.
+
+### Symmetric Encryption
+
+A type of encryption that relies on only a single key to both encrypt and decrypt data. The key must be known to all parties involved in communication and must therefore typically be shared between the parties at one point or another.
+
+Symmetric-key algorithms tend to be faster than their asymmetric counterparts.
+
+The most widely used symmetric-key algorithms are part of the Advanced Encryption Standard (**AES**).
+
+### Asymmetric Encryption
+
+Also known as public-key encryption, asymmetric encryption relies on two keys—a public key and a private key—to encrypt and decrypt data. The keys are generated using cryptographic algorithms and are mathematically connected such that data encrypted with the public key can only be decrypted with the private key.
+
+While the private key must be kept secure to maintain the fidelity of this encryption paradigm, the public key can be openly shared.
+
+Asymmetric-key algorithms tend to be slower than their symmetric counterparts.
+
+### AES
+
+Stands for **Advanced Encryption Standard**. AES is a widely used encryption standard that has three symmetric-key algorithms (AES-128, AES-192, and AES-256).
+
+Of note, AES is considered to be the "gold standard" in encryption and is even used by the U.S. National Security Agency to encrypt top secret information.
+
+### HTTPS
+
+The **H**yper**T**ext **T**ransfer **P**rotocol **S**ecure is an extension of **HTTP** that's used for secure communication online. It requires servers to have trusted certificates (usually **SSL certificates**) and uses the Transport Layer Security (**TLS**), a security protocol built on top of **TCP**, to encrypt data communicated between a client and a server.
+
+### TLS
+
+The **T**ransport **L**ayer **S**ecurity is a security protocol over which **HTTP** runs in order to achieve secure communication online. "HTTP over TLS" is also known as **HTTPS**.
+
+### SSL Certificate
+
+A digital certificate granted to a server by a **certificate authority**. Contains the server's public key, to be used as part of the **TLS handshake** process in an **HTTPS** connection.
+
+An SSL certificate effectively confirms that a public key belongs to the server claiming it belongs to them. SSL certificates are a crucial defense against **man-in-the-middle attacks**.
+
+### Certificate Authority
+
+A trusted entity that signs digital certificates—namely, SSL certificates that are relied on in **HTTPS** connections.
+
+### TLS Handshake
+
+The process through which a client and a server communicating over **HTTPS** exchange encryption-related information and establish a secure communication. The typical steps in a TLS handshake are roughly as follows:
+
+- The client sends a **client hello**—a string of random bytes—to the server.
+- The server responds with a **server hello**—another string of random bytes—as well as its **SSL certificate**, which contains its **public key**.
+- The client verifies that the certificate was issued by a **certificate authority** and sends a **premaster secret**—yet another string of random bytes, this time encrypted with the server's public key—to the server.
+- The client and the server use the client hello, the server hello, and the premaster secret to then generate the same **symmetric-encryption** session keys, to be used to encrypt and decrypt all data communicated during the remainder of the connection.
+
+# 25. API Design
+
+## 4 Prerequisites
+
+### HTTP
+
+The **H**yper**T**ext**T**ransfer**P**rotocol is a very common network protocol implemented on top of TCP. Clients make HTTP requests, and servers respond with a response.
+
+Requests typically have the following schema:
+
+```
+host: string (example: algoexpert.io)
+port: integer (example: 80 or 443)
+method: string (example: GET, PUT, POST, DELETE, OPTIONS or PATCH)
+path: string
+headers: pair list (example: "Content-Type" => "application/json")
+body: opaque sequence of bytes
+```
+
+Responses typically have the following schema:
+
+```
+status code: integer (example: 200, 401)
+headers: pair list (example: "Content-Length" => 1238)
+body: opaque sequence of bytes
+```
+
+### JSON
+
+A file format heavily used in APIs and configuration. Stands for **J**ava**S**cript **O**bject **N**otation. Example:
+
+```
+{
+  "version": 1.0,
+  "name": "AlgoExpert Configuration"
+}
+```
+
+### YAML
+
+A file format mostly used in configuration. Example:
+
+```
+version: 1.0
+name: AlgoExpert Configuration
+```
+
+### ACL
+
+Short for **Access-Control List**. This term is often used to refer to a permissioning model: which users in a system can perform which operations. For instance, APIs often come with ACLs defining which users can delete, edit, or view certain entities.
+
+## 2 Key Terms
+
+### Pagination
+
+When a network request potentially warrants a really large response, the relevant API might be designed to return only a single **page** of that response (i.e., a limited portion of the response), accompanied by an identifier or token for the client to request the next page if desired.
+
+Pagination is often used when designing **List** endpoints. For instance, an endpoint to list videos on the YouTube Trending page could return a huge list of videos. This wouldn't perform very well on mobile devices due to the lower network speeds and simply wouldn't be optimal, since most users will only ever scroll through the first ten or twenty videos. So, the API could be designed to respond with only the first few videos of that list; in this case, we would say that the API response is **paginated**.
+
+### CRUD Operations
+
+Stands for **Create, Read, Update, Delete** Operations. These four operations often serve as the bedrock of a functioning system and therefore find themselves at the core of many APIs. The term **CRUD** is very likely to come up during an API-design interview.
