@@ -5,3 +5,4 @@ list comprehensions
 lambda function
 Set = iterable, but unordered. SO CAN ACCEPT WITH INDEX
 github resume
+Mini project - web music player
