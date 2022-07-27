@@ -11,3 +11,4 @@ Mini project - anonymous chatting web
 Mini project - small login function page
   - Main project css property change
 BackendServer implementing
+Dummy data from backend => frontend
