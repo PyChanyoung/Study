@@ -12,3 +12,4 @@ Mini project - small login function page
   - Main project css property change
 BackendServer implementing
 Dummy data from backend => frontend 2nd
+Mongo DB Schema create and data retrieve
