@@ -1,83 +1,88 @@
-# 3. Client-Server Model
-
-## 6 Key Terms
+# Client-Server Model
 
 ### Client
 
-A machine or process that requests data or service from a server.
+- A machine or process that requests data or service from a server.
 
-Note that a single machine or piece of software can be both a client and a server at the same time. For instance, a single machine could act as a server for end users and as a client for a database.
+- Note that a single machine or piece of software can be both a client and a server at the same time. For instance, a single machine could act as a server for end users and as a client for a database.
 
 ### Server
 
-A machine or process that provides data or service for a client, usually by listening for incoming network calls.
-
-Note that a single machine or piece of software can be both a client and a server at the same time. For instance, a single machine could act as a server for end users and as a client for a database.
+- A machine or process that provides data or service for a client, usually by listening for incoming network calls.
 
 ### Client-Server Model
 
-The paradigm by which modern systems are designed, which consists of clients requesting data or service from servers and servers providing data or service to clients.
+- The paradigm by which modern systems are designed, which consists of clients requesting data or service from servers and servers providing data or service to clients.
 
 ### IP Address
 
-An address given to each machine connected to the public internet. IPv4 addresses consist of four numbers separated by dots: **a.b.c.d** where all four numbers are between 0 and 255. Special values include:
-
-- **127.0.0.1**: Your own local machine. Also referred to as **localhost.**
-- **192.168.x.y**: Your private network. For instance, your machine and all machines on your private wifi network will usually have the **192.168** prefix.
+- An address given to each machine connected to the public internet. IPv4 addresses consist of four numbers separated by dots: **a.b.c.d** where all four numbers are between 0 and 255. Special values include:
+  - **127.0.0.1**: Your own local machine. Also referred to as **localhost.**
+  - **192.168.x.y**: Your private network. For instance, your machine and all machines on your private wifi network will usually have the **192.168** prefix.
 
 ### Port
 
-In order for multiple programs to listen for new network connections on the same machine without colliding, they pick a **port** to listen on. A port is an integer between 0 and 65,535 (2^16 ports total).
+- **Port** is "a number assigned to uniquely identify a connection endpoint and to direct data to a specific service" <Wikipeida>
+- In order for multiple programs to listen for new network connections on the same machine without colliding, they pick a **port** to listen on. A port is an integer between 0 and 65,535 (2^16 ports total).
+- Typically, ports 0-1023 are reserved for system ports (also called well-known ports) and shouldn’t be used by user-level processes. Certain ports have pre-defined uses, and although you usually won’t be required to have them memorized, they can sometimes come in handy.
+- Examples:
+  - 22: Secure Shell
+  - 53: DNS lookup
+  - 80: HTTP
+  - 443: HTTPS
 
-Typically, ports 0-1023 are reserved for system ports (also called well-known ports) and shouldn’t be used by user-level processes. Certain ports have pre-defined uses, and although you usually won’t be required to have them memorized, they can sometimes come in handy. Below are some examples:
+### DNS (Domain Name System)
 
-- 22: Secure Shell
-- 53: DNS lookup
-- 80: HTTP
-- 443: HTTPS
+- DNS describes the entities and protocols involved in the transaction from domain names to IP addresses.
+- Typically, machines make a DNS query to a well-known entity which is responsible for returning the IP address (or multiple ones) of the requested domain name in the response.
 
-### DNS
+# Network Protocols
 
-Short for Domain Name System, it describes the entities and protocols involved in the translation from domain names to IP addresses. Typically, machines make a DNS query to a well-known entity which is responsible for returning the IP address (or multiple ones) of the requested domain name in the response.
+### Protocol
 
-# 4. Network Protocols
+- An agreed-upon set of rules for an interaction between two parties.
 
-## 3 Prerequisites
+### IP (Internet Protocol)
 
-### Client
+- This network protocol outlines how almost all machine-to-machine communications should happen in the world. Other protocol like TCP, UDP, and HTTP are built on top of the IP.
+- Modern internet effectively runs on IP : when a message is sent to another machine, data is going to be sent in the form of an IP packet.
 
-A machine or process that requests data or service from a server.
+### IP Packet
+- Sometimes more broadly referred to as just a (network) packet, an IP packet is effectively the smallest unit used to describe data being sent over IP, aside from bytes.
+- An IP packet consists of:
+  - An **IP header**, which contains the <u>source and destination IP addresses</u>('from' and 'to') as well as other information related to the network (e.g., total size of the packet, version of the internet protocol that IP packet is operating by: IPv4 or IPv6). It's usually 20 and 60 bytes (smaller portion than main data).
+  - A **payload (or data)**, which is just the data being sent over the network.
+- One IP packet is only 2 to the power of 16 (2^16) bytes: **~65,000bytes** or **~0.065MB**
+  - This is pretty small considering that you sometimes send an email or big files. So, you'd have to send multiple packets.
+  - **Problem with sending multiple files** : if all you're using is the Internet Protocol, there's <u>no way of guaranteeing that these packets are actually (1) gonna be received (2) in correct order</u>.
+  - => <u>This is where TCP comes into play</u>
 
-Note that a single machine or piece of software can be both a client and a server at the same time. For instance, a single machine could act as a server for end users and as a client for a database.
+### TCP (Transmission Control Protocol)
 
-### Server
+- Network protocol built on top on the Internet Protocol (IP). 
+- Allows for ordered, **reliable** data delivery between machines over the public internet by creating a connection.
+  - Reliability: You can ensure that the packets will get to the destination OR at least know if some of the packets get corrupted or keep failing.
+- **TCP Header** : In the data portion of the IP packet, there's a TCP header. Contains information about orders of packets you're sending.
+- **Port Numbers** <Michigan Coursera 'Web Application Technologies'>
+  - While an IP address is like a phone number, TCP port is like a phone extension.
+  - A port is an application-specific or process-specific software communications endpoint/
+- **Sockets**
+  - A kind of file that acts like a stream. Processes can read and write to sockets and communicate in this manner. Most of the time the sockets are fronts for TCP connection.
+  - "An internet socket or network socket is an endpoint of bidirectional inter-process communication flow across an Internet Protocol-based computer network, such as the internet" <Michigan Coursera>
+  - Sockets are softwares / libraries. Think of it like computer phone calls. You know where you're calling, and once they answer, it's a two-way communication.
+  - The key here is that it's the applications / software (sockets) talking to each other, and the Internet is the intermediary to allow that conversation to happen. When you're retrieving a picture, the socket decides whether you're allowed to see it or not. 
+- **Handshake**
+  - If one machine (e.g., client) wants to communicate with another machine (e.g., server) over TCP, a handshake happens first.
+  - A handshake is a special TCP interaction where one computer contacts another by sending a few packets saying "I'd like to connect with you" (**SYN**C), and the other computer responds and says, "Okay" (**ACK**KNOWLEDGE). THen the client computer responds and says "We're connected" (**ACK**).
+  - Once the connection is established, both machines can freely send data to another. Yey, if one computer doesn't send data in a given amount of times, the connection can be timed out. Or, one machine can end the communication by sending a special message to the other.
+- TCP is usually implemented in the kernel, which exposes sockets to applications that they can use to stream data through an open connection.
+- TCP is basically a more powerful and functional wrapper around IP, BUT it still lacks a robust framework that developers and engineers can use.
+- => <u>This is were HTTP comes into play</u>
 
-A machine or process that provides data or service for a client, usually by listening for incoming network calls.
+### HTTP (HyperText Transfer Protocol)
 
-Note that a single machine or piece of software can be both a client and a server at the same time. For instance, a single machine could act as a server for end users and as a client for a database.
-
-### IP Address
-
-An address given to each machine connected to the public internet. IPv4 addresses consist of four numbers separated by dots: **a.b.c.d** where all four numbers are between 0 and 255. Special values include:
-
-- **127.0.0.1**: Your own local machine. Also referred to as **localhost.**
-- **192.168.x.y**: Your private network. For instance, your machine and all machines on your private wifi network will usually have the **192.168** prefix.
-
-## 4 Key Terms
-
-### IP
-
-Stands for **Internet Protocol.** This network protocol outlines how almost all machine-to-machine communications should happen in the world. Other protocols like **TCP, UDP** and **HTTP** are built on top of IP.
-
-### TCP
-
-Network protocol built on top on the Internet Protocol (IP). Allows for ordered, reliable data delivery between machines over the public internet by creating a **connection.**
-
-TCP is usually implemented in the kernel, which exposes **sockets** to applications that they can use to stream data through an open connection.
-
-### HTTP
-
-The **H**yper**T**ext**T**ransfer**P**rotocol is a very common network protocol implemented on top of TCP. Clients make HTTP requests, and servers respond with a response.
+- The HTTP is a very common network protocol implemented on top of the TCP. It introduces a higher level abstraction above TCP and, of course, above IP.
+- **Request-Response Paradigm** : Clients make HTTP requests, and servers respond with a response. This paradigm makes it very easy for developers to create robust-and-easy-to-maintain systems.
 
 Requests typically have the following schema:
 
@@ -98,30 +103,20 @@ headers: pair list (example: "Content-Length" => 1238)
 body: opaque sequence of bytes
 ```
 
-### IP Packet
+- While IP and TCP protocols are merely for transportation of data (very low-level), HTTP (this is what you'll mostly interact with) introduces the opportunity to add business logic, which is what you want when designing a large-scale system.
+- Internet and sockets were created in the 70s, and HTTP was invented in 1990 and is an application protocol that runs on top of the sockets <Michigan Coursera>
+  - "Sockets are the things that make the phone call, and HTTP is what we do once this call has been established"
 
-Sometimes more broadly referred to as just a (network) **packet,** an IP packet is effectively the smallest unit used to describe data being sent over **IP,** aside from bytes. An IP packet consists of:
-
-- an **IP header,** which contains the source and destination **IP addresses** as well as other information related to the network (e.g., total size of the packet, version of the internet protocol that this IP packet is operating by: IPv4 or IPv6). It's usually between 20 and 60 bytes (smaller portion than main data).
-- a **payload,** which is just the data being sent over the network
-
-One IP packets are only two to the power of 16 (2^16) bytes: ~65,000 bytes or ~0.065MB. - This is pretty small considering that you sometimes send an email or big files. So, you'd have to send multiple packets. - **Problem with sending multiple files**: if all you're using is the Internet Protocol, there's <u>NO way of guaranteeing that these packets are actually (1) gonna be received (2) in correct order.</u> - ==> **this is where TCP comes into play**
-
-# 5. Storage
-
-## 4 Key Terms
+# Storage
 
 ### Databases
 
-Data are programs that either use disk or memory to do 2 core things: **record(=store, write)** data and **query (=retrieve, read)** data. In general, they are themselves servers(=Databases are just server) that are long-lived and interact with the rest of your application through network calls, with protocols on top of TCP or even HTTP.
-
-Persistence
-
-- Some databases only keep records in memory, and the users of such databases are aware of the fact that those records may be lost forever if the machine or process dies.
-
-- For the most part though, databases need persistence of those records, and thus cannot use memory. This means that you have to write your data to disk. Anything written to disk will remain through power loss or network partitions, so that's what is used to keep permanent records.
-
-Since machines die often in a large scale system, special disk partitions or volumes are used by the database processes, and those volumes can get recovered even if the machine were to go down permanently.
+- Databases are programs that either use disk or memory to do 2 core things: **record(=store, write)** data and **query (=retrieve, read)** data. 
+- Databases are just **servers**. They are long-lived and interact with the rest of your application through network calls, with protocols on top of the TCP or even HTTP.
+- **Persistence**
+  - Some databases only keep records in memory, and the users of such databases are aware of the fact that those records may be lost forever if the machine or process dies.
+  - For the most part though, databases need persistence of those records, and thus cannot use memory. This means that you have to write your data to disk. Anything written to disk will remain through power loss or network partitions, so that's what is used to keep permanent records.
+- Since machines die often in a large scale system, special disk partitions or volumes are used by the database processes, and those volumes can get recovered even if the machine were to go down permanently.
 
 ### Disk
 
@@ -332,7 +327,7 @@ Note that a single machine or piece of software can be both a client and a serve
   - **Load Balancer** : maybe the best case. Distribute multiple requests across servers following a certain pattern
   - **Logging** and gathering metrics
   - **Caching** (e.g., HTML pages)
-  - Security : no single serer receives all of the requests and gets taken by a malicious client
+  - Security : no single server receives all of the requests and gets taken by a malicious client
   - You can set up a reverse proxy in a way that it filters out requests that you want to ignore
 - The client doesn't know/see that a reverse proxy exists, and thinks that it's only interacting with the server
 - (ex) When your browser (client) makes a DNS query (e.g., AlgoExpert.io), it gets the reverse proxy's IP address as the destination, and then the reverse proxy forwards/reroutes the request to the server with IP address.
@@ -381,7 +376,14 @@ Pronounced "engine X"-- not "N jinx", Nginx is a very popular webserver that's o
 
 ### Hashing Function
 
-A function that takes in a specific data type(such as a string or an identifier) and outputs a number. Different inputs _may_ have the same output, but a good hashing function attempts to minimize those **hashing collisions** (which is equivalent to maximizing **uniformity**).
+A function that takes in a specific data type(such as a string or an identifier) and outputs a number. (Transforming arbitrary pieces of data into some fixed size value)
+The arbitrary piece of data(input) can be an HTTP request, a username, or anything that can be hashed or transformed
+Different inputs _may_ have the same output, but a good hashing function attempts to minimize those **hashing collisions** (which is equivalent to maximizing **uniformity**: map the expected inputs as evenly as possible over its output range).
+In practice, you'd use a pre-made industry-grade hashing function (e.g., MD5, SHA-1, the Bcrypt hashing algorithm) instead of writing your own.
+A simple hashing strategy of hashing our client's username, request, or the IP address and modding the hashes by the number of servers(buckets) does not work well..
+- (1) when one of your servers dies
+- (2) when you add another server : you'd have to divide(%) the hashes by the (new) number of buckets again, which would return a different index for different hashes. This means that all of your preexisting in-memory caches in your system are no longer nearly as useful.
+=> Consistent Hashing/ Rendezvous Hashing can solve the problem
 
 ### Load Balancer
 
@@ -396,6 +398,26 @@ A type of hashing that minimizes the number of keys that need to be remapped whe
 ### Rendezvous Hashing
 
 A type of hashing also coined **highest random weight** hashing. Allows for minimal re-distribution of mappings when a server goes down.
+
+### 부록
+Consistent Hashing
+A type of hashing that minimizes the number of keys that need to be remapped when a hash table gets resized. When you ever add/remove a server, consistent hashing maintains some level of consistency between hashes and their target buckets
+Method :
+1. Place the servers on a (conceptual) circle using a hashing function (e.g., with server names)
+2. Also, position the clients using a hashing function (e.g., IP address, HTTP requests, or usernames)
+3. Move in a clockwise/counterclockwise direction for each client, and the first server you encounter is going to be the server that your load balancer will reroute this client to.
+
+* where A, B, C, D are servers, and C1, C2, C3, C4 are clients
+
+Often used by load balancers to distribute traffic to servers
+It minimizes the number of requests that get forwarded to different servers when new servers are added or when existing servers are brought down.
+Rendezvous Hashing
+A type of hashing also coined highest random weight hashing
+Allows for minimal re-distribution of mappings when a server goes down
+SHA (Secure Hash Algorithms)
+A collection of cryptographic hash functions used in the industry
+SHA-3 is a popular choice to use in a system
+
 
 ### SHA
 
@@ -502,6 +524,17 @@ An in-memory key-value store. Does offer some persistent storage options but is 
 ### ZooKeeper
 
 ZooKeeper is a strongly consistent, highly available key-value store. it's often used to store important configuration or to perform leader election.
+
+### 부록
+
+Key-Value Store
+Key-Value Store is a flexible (non-tabular structure) NoSQL database that's often used for caching and dynamic configuration
+Dynamic configuration : having special parameters or constants in your system that different systems can rely on (ex) AlgoExpert has a parameter called SystemExpert_is_launched that other parts of their systems rely on. It makes sense to store this using a key-value mapping (e.g., ‘SystemExpert_is_launched’: True)
+Allow you to store key-value pairs where keys (typically strings) are mapped to arbitrary values. Similar to hash tables.
+Popular options include DynamoDB, Etcd, Redis, and ZooKeeper.
+Etcd : a strongly consistent and highly available key-value store that's often used to implement leader election in a system.
+Redis : An in-memory key-value store. Does offer some persistent storage options but is typically used as a really fast, best-effort caching solution. Redis is also often used to implement rate limiting.
+ZooKeeper :  a strongly consistent, highly available key-value store. it's often used to store important configuration or to perform leader election.
 
 # 14. Specialized Storage Paradigms
 
@@ -667,19 +700,46 @@ Since machines die often in a large scale system, special disk partitions or vol
 
 ### Replication
 
-The act of duplicating the data from one database server to others. This is sometimes used to increase the redundancy of your system and tolerate regional failures for instance. Other times you can use replication to move data closer to your clients, thus decreasing the latency of accessing specific data.
+**The act of duplicating the data from one database server to others**. This is sometimes used to increase the redundancy of your system and tolerate regional failures for instance. Other times you can use replication to move data closer to your clients, thus decreasing the latency of accessing specific data.
 
 ### Sharding
 
-Sometimes called **data partitioning**, sharding is the act of splitting a database into two or more pieces called **shard** and is typically done to increase the throughput of your database. Popular sharding strategies include:
+Sometimes called **data partitioning**, **sharding is the act of splitting a database into two or more pieces called ***shard*** and is typically done to increase the throughput of your database**. Popular sharding strategies include:
 
 - Sharding based on a client's region
 - Sharding based on the type of data being stored (e.g: user data gets stored in one shard, payments data gets stored in another shard)
-- SHarding based on the hash of a column (only for structred data)
+- SHarding based on the hash of a column (only for structured data)
 
 ### Hot Spot
 
 When distributing a workload across a set of servers, that workload might be spread unevenly. This can happen if your **sharding key** or your **hashing function** are suboptimal, or if your workload is naturally skewed: some severs will receive a lot more traffic than others, thus creating a "hot spot".
+
+### Appendix
+### Replication and Sharding
+#### Replication
+**Definition** : The act of duplicating the data from one database server to others.
+**Benefits** :
+- <u>Improve availability</u> : increase the redundancy of your system and tolerate regional failures for instance.
+  - Say, you have one main database and have a replica (duplicate version) of the main database. The replica will take over if the main database fails. In order for this to work, whenever there's an update with the main database, this update needs to also happen in the replica in a <u>synchronous</u> way.
+    - If 'WRITE' operation fails on the replica, the WRITE operation should not complete on the main database.
+- Some feeds/posts (e.g.,on Linkedin) may not need to be up-to-date, in which case updates can be made in an <u>asynchronous</u> way.
+- Other times you can use replication to move data closer to your clients, thus decreasing the latency of accessing specific data.
+
+#### Sharding (or Data partitioning)
+**Definition** : Sharding is the act of splitting a database into two or more pieces called **shard** and is typically done <u>to increase the throughput of your database.</u>
+**Popular sharding strategies :**
+  - Sharding based on a client's region
+  - Sharding based on the type of data being stored (e.g: user data gets stored in one shard, payments data gets stored in another shard)
+  - Sharding based on the hash of a column (only for structured data)
+- You can have the logic that dictates what shard a database read or write gets forwarded to in the reverse proxy (instead of inside application server). Have your application server be a client to your database servers(shard) and a reverse proxy act on behalf of your database servers.
+
+#### Hot Spot
+**Definition** : 
+- When distributing a workload across a set of servers, that workload might be spread unevenly. 
+  - (Ex) If you partition data by the first letter of the customer's names, a shard with 'X,Y,Z' would get way less traffic than the others.
+- This can happen if your sharding key or your hashing function are suboptimal, or if your workload is naturally skewed: some servers will receive a lot more traffic than others, thus creating a "hot spot".
+  - You want to use a smart sharding strategy/ hashing function that guarantees uniformity,
+
 
 # 16. Leader Election
 
